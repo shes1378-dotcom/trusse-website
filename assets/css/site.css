@@ -347,11 +347,11 @@ select.input option{color:var(--ink);background:#fff}
   .sc-media,.nav,.sc-tab,.btn{transition:none}
 }
 /* ---------- Photos, step picture and icons ---------- */
-.photo-hero{background-image:linear-gradient(180deg,rgba(15,14,13,0),rgba(15,14,13,.18)),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Buildings_%5E_Cranes%2C_Nine_Elms_-_geograph.org.uk_-_7344492.jpg/1920px-Buildings_%5E_Cranes%2C_Nine_Elms_-_geograph.org.uk_-_7344492.jpg");background-position:center 30%}
+.photo-hero{background-image:linear-gradient(180deg,rgba(15,14,13,0),rgba(15,14,13,.18)),url("../img/photos/hero-nine-elms-1920.jpg");background-position:center 30%}
 .credit{font-size:12px;letter-spacing:0;text-transform:none;color:var(--mid)}
 .credit a{color:inherit;text-underline-offset:2px}
 .photo{border-radius:8px;background:var(--charcoal) center/cover no-repeat}
-.photo--problem{aspect-ratio:4/3;margin-top:12px;background-image:url("https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/At_a_Building_site_%28Unsplash%29.jpg/1920px-At_a_Building_site_%28Unsplash%29.jpg");background-position:center 30%}
+.photo--problem{aspect-ratio:4/3;margin-top:12px;background-image:url("../img/photos/problem-site-worker-900.jpg");background-position:center 30%}
 .meter{display:block;height:4px;margin-top:14px;background:var(--hair);border-radius:2px;overflow:hidden}
 .meter i{display:block;height:100%;background:var(--red)}
 .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;counter-reset:step;max-width:640px;width:100%;justify-self:end}
@@ -362,7 +362,7 @@ select.input option{color:var(--ink);background:#fff}
 .flow__icon{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--page);border:1px solid var(--hair);color:var(--ink)}
 .flow__icon--red{background:var(--ink);border-color:var(--ink);color:var(--page)}
 .point__icon{display:grid;place-items:center;width:44px;height:44px;border-radius:8px;background:var(--page);border:1px solid var(--hair);color:var(--ink);margin-bottom:6px}
-.band{position:relative;margin-top:96px;min-height:440px;border-radius:8px;overflow:hidden;display:flex;align-items:flex-end;background:var(--charcoal) center/cover no-repeat;background-image:linear-gradient(90deg,rgba(15,14,13,.72) 0%,rgba(15,14,13,.38) 45%,rgba(15,14,13,0) 70%),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/King%27s_Cross_Central_development%2C_Granary_Square_and_tower_cranes_02.jpg/1920px-King%27s_Cross_Central_development%2C_Granary_Square_and_tower_cranes_02.jpg");background-position:center 35%;color:var(--page)}
+.band{position:relative;margin-top:96px;min-height:440px;border-radius:8px;overflow:hidden;display:flex;align-items:flex-end;background:var(--charcoal) center/cover no-repeat;background-image:linear-gradient(90deg,rgba(15,14,13,.72) 0%,rgba(15,14,13,.38) 45%,rgba(15,14,13,0) 70%),url("../img/photos/band-kings-cross-1920.jpg");background-position:center 35%;color:var(--page)}
 .band__body{display:flex;flex-direction:column;align-items:flex-start;gap:20px;padding:48px;max-width:620px}
 .band .t-label{color:var(--hair)}
 .band__line{font-family:var(--serif);font-weight:400;font-size:40px;line-height:44px;letter-spacing:-.4px;text-wrap:balance;text-shadow:0 1px 14px rgba(15,14,13,.35)}
@@ -379,7 +379,8 @@ select.input option{color:var(--ink);background:#fff}
   .flow li{padding-right:12px}
   .flow li:not(:last-child)::after{left:56px;right:8px;top:24px}
   .flow li:not(:last-child)::before{right:8px;top:20px}
+  .photo-hero{background-image:linear-gradient(180deg,rgba(15,14,13,0),rgba(15,14,13,.18)),url("../img/photos/hero-nine-elms-960.jpg")}
   .band__credit{top:10px;bottom:auto}
   .band__line{font-size:26px;line-height:30px}
-  .band{align-items:flex-end;background-image:linear-gradient(0deg,rgba(15,14,13,.80) 0%,rgba(15,14,13,.30) 60%,rgba(15,14,13,0) 100%),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/King%27s_Cross_Central_development%2C_Granary_Square_and_tower_cranes_02.jpg/1920px-King%27s_Cross_Central_development%2C_Granary_Square_and_tower_cranes_02.jpg")}
+  .band{align-items:flex-end;background-image:linear-gradient(0deg,rgba(15,14,13,.80) 0%,rgba(15,14,13,.30) 60%,rgba(15,14,13,0) 100%),url("../img/photos/band-kings-cross-960.jpg")}
 }
