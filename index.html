@@ -352,9 +352,8 @@
 
       <div>
         <div id="wl-form-wrap">
-          <form class="form" id="waitlist-form" name="waitlist" action="mailto:contact@trusseai.com" method="POST" enctype="text/plain">
-            <input type="hidden" name="form-name" value="waitlist">
-            <p class="vh" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <form class="form" id="waitlist-form" name="waitlist" action="https://docs.google.com/forms/d/e/1FAIpQLSfR7WRVRgq-YIoTctsi6JeVLrwIU5r92m4hNYVs_dOdbM7RpQ/formResponse" method="POST">
+            <p class="vh" aria-hidden="true"><label>Leave this empty <input id="wl-hp" tabindex="-1" autocomplete="off"></label></p>
 
             <div class="summary" id="wl-errors" tabindex="-1" role="alert" aria-labelledby="wl-errors-title" hidden>
               <h3 id="wl-errors-title">There is a problem</h3>
@@ -365,22 +364,22 @@
               <div class="field">
                 <label for="wl-name">Full name</label>
                 <p class="field-error" id="wl-name-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
-                <input class="input" id="wl-name" name="name" type="text" autocomplete="name" required>
+                <input class="input" id="wl-name" name="entry.870584847" type="text" autocomplete="name" required>
               </div>
               <div class="field">
                 <label for="wl-email">Work email</label>
                 <p class="field-error" id="wl-email-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
-                <input class="input" id="wl-email" name="email" type="email" autocomplete="email" spellcheck="false" required>
+                <input class="input" id="wl-email" name="entry.1969885639" type="email" autocomplete="email" spellcheck="false" required>
               </div>
               <div class="field">
                 <label for="wl-company">Company</label>
                 <p class="field-error" id="wl-company-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
-                <input class="input" id="wl-company" name="company" type="text" autocomplete="organization" required>
+                <input class="input" id="wl-company" name="entry.791636348" type="text" autocomplete="organization" required>
               </div>
               <div class="field">
                 <label for="wl-role">Your role</label>
                 <p class="field-error" id="wl-role-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
-                <select class="input" id="wl-role" name="role" required>
+                <select class="input" id="wl-role" name="entry.1855577748" required>
                   <option value="">Choose one</option>
                   <option>Subcontractor</option>
                   <option>Main contractor</option>
@@ -389,22 +388,27 @@
                   <option>Other</option>
                 </select>
               </div>
+              <div class="field" id="wl-role-other-field" hidden>
+                <label for="wl-role-other">What is your role?</label>
+                <p class="field-error" id="wl-role-other-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
+                <input class="input" id="wl-role-other" type="text" autocomplete="organization-title" maxlength="100">
+              </div>
             </div>
 
             <div class="field">
               <label for="wl-problem">What is your biggest contract-management problem?</label>
               <p class="field-error" id="wl-problem-error" hidden><span class="vh">Error: </span><span class="msg"></span></p>
-              <textarea class="input" id="wl-problem" name="problem" rows="3" required></textarea>
+              <textarea class="input" id="wl-problem" name="entry.1728272431" rows="3" required></textarea>
             </div>
             <div class="field">
               <label for="wl-wish">What do you wish Trusse would solve for you? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
               <p class="hint" id="wl-wish-hint">For example: “Tell me which notices are due this week.”</p>
-              <textarea class="input" id="wl-wish" name="wish" rows="3" aria-describedby="wl-wish-hint"></textarea>
+              <textarea class="input" id="wl-wish" name="entry.1000469303" rows="3" aria-describedby="wl-wish-hint"></textarea>
             </div>
 
             <div class="checks">
-              <label class="check"><input type="checkbox" name="expo" value="yes">I’ll be at London Build Expo and would like to meet</label>
-              <label class="check"><input type="checkbox" name="updates" value="yes">Send me occasional Trusse updates. Unsubscribe any time.</label>
+              <label class="check"><input type="checkbox" id="wl-expo" name="entry.1379441582" value="yes">I’ll be at London Build Expo and would like to meet</label>
+              <label class="check"><input type="checkbox" id="wl-updates" name="entry.1804294112" value="yes">Send me occasional Trusse updates. Unsubscribe any time.</label>
             </div>
 
             <p class="submit-error" id="wl-submit-error" role="alert" hidden>Sorry, that didn’t go through. Please check your connection and try again.</p>
@@ -414,11 +418,11 @@
         </div>
 
         <div class="done" id="wl-done-wrap" hidden>
-          <p class="t-label">One last step</p>
-          <p class="t-body"><strong>Press Send in the email that just opened</strong> to join the waiting list. If no email opened, write to <a href="mailto:contact@trusseai.com">contact@trusseai.com</a>.</p>
+          <p class="t-label">Submission received</p>
           <h3 class="t-xl" id="wl-done" tabindex="-1">Thank You, <span id="wl-first-name">there</span></h3>
+          <p class="t-body">You’re on the Trusse waiting list. We’ve received your details and we’ll be in touch soon.</p>
           <p class="t-body">Thank you for telling us what slows you down. We’ll email you when the free version is ready for you.</p>
-          <p class="t-body" id="wl-done-expo" hidden>We’ll be in touch to arrange a time at London Build Expo.</p>
+          <p class="t-body" id="wl-done-expo" hidden>We’ll also contact you to arrange a time to meet at London Build Expo.</p>
           <p class="preview-note" id="wl-preview-note" hidden>This is a preview, so nothing was sent. On trusseai.com your details go to the waiting list.</p>
         </div>
       </div>
@@ -459,6 +463,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=1" defer></script>
+<script src="assets/js/site.js?v=2" defer></script>
 </body>
 </html>

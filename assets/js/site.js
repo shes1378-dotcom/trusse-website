@@ -80,7 +80,7 @@
   /* ---------- Links that pre-tick a box in the form ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('[data-pick]'), function (link) {
     link.addEventListener('click', function () {
-      var box = document.querySelector('#waitlist-form input[name="' + link.getAttribute('data-pick') + '"]');
+      var box = $('wl-' + link.getAttribute('data-pick'));
       if (box) box.checked = true;
     });
   });
@@ -193,17 +193,29 @@
   if (!form) return;
   form.noValidate = true;
 
-  // On the live site, submitting opens an email to WAITLIST_EMAIL. Anywhere else (such as a
-  // preview link) the form shows its confirmation without sending anything.
-  var WAITLIST_EMAIL = 'contact@trusseai.com';
-  var LIVE = /(^|\.)trusseai\.com$|\.netlify\.app$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  // Sign-ups go to the Trusse waiting-list Google Form, whose answers land in a linked Google Sheet.
+  // Only the live site sends. Anywhere else (such as a local preview) shows the confirmation without sending.
+  var FORM_URL = form.getAttribute('action');
+  var LIVE = /(^|\.)trusseai\.com$/.test(location.hostname);
+  var NAMES = {
+    name: 'entry.870584847', email: 'entry.1969885639', company: 'entry.791636348',
+    role: 'entry.1855577748', problem: 'entry.1728272431', wish: 'entry.1000469303',
+    expo: 'entry.1379441582', updates: 'entry.1804294112'
+  };
 
   var summary = $('wl-errors');
   var summaryList = $('wl-errors-list');
   var submitBtn = $('wl-submit');
+  var submitLabel = submitBtn.textContent;
   var submitError = $('wl-submit-error');
-  var FIELDS = ['name', 'email', 'company', 'role', 'problem'];
-  var value = function (data, key) { return String(data.get(key) || '').trim(); };
+  var roleSelect = $('wl-role');
+  var roleOther = $('wl-role-other');
+  var roleOtherField = $('wl-role-other-field');
+  var FIELDS = ['name', 'email', 'company', 'role', 'role-other', 'problem'];
+  var value = function (data, key) {
+    if (key === 'role-other') return roleOther.value.trim();
+    return String(data.get(NAMES[key]) || '').trim();
+  };
 
   var validate = function (data) {
     var e = {};
@@ -213,6 +225,7 @@
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = 'Enter an email address in the correct format, like name@example.com';
     if (!value(data, 'company')) e.company = 'Enter your company name';
     if (!value(data, 'role')) e.role = 'Select your role';
+    else if (value(data, 'role') === 'Other' && !value(data, 'role-other')) e['role-other'] = 'Tell us your role';
     if (!value(data, 'problem')) e.problem = 'Tell us your biggest contract-management problem';
     return e;
   };
@@ -227,6 +240,15 @@
     if (message) input.setAttribute('aria-describedby', 'wl-' + key + '-error');
     else if (key !== 'wish') input.removeAttribute('aria-describedby');
   };
+
+  // "Other" role: show a box to type the role in.
+  var syncRoleOther = function () {
+    var other = roleSelect.value === 'Other';
+    roleOtherField.hidden = !other;
+    if (!other) setFieldError('role-other', '');
+  };
+  roleSelect.addEventListener('change', syncRoleOther);
+  syncRoleOther();
 
   var showErrors = function (errors) {
     summaryList.textContent = '';
@@ -254,7 +276,7 @@
 
   var showDone = function (data, preview) {
     $('wl-first-name').textContent = value(data, 'name').split(/\s+/)[0] || 'there';
-    $('wl-done-expo').hidden = !data.get('expo');
+    $('wl-done-expo').hidden = !value(data, 'expo');
     $('wl-preview-note').hidden = !preview;
     $('wl-form-wrap').hidden = true;
     $('wl-done-wrap').hidden = false;
@@ -266,27 +288,21 @@
     submitError.hidden = true;
     var data = new FormData(form);
     if (showErrors(validate(data))) return;
+    if ($('wl-hp').value) { showDone(data, false); return; } // a bot filled the hidden box: send nothing
     if (!LIVE) { showDone(data, true); return; }
+    if (!window.fetch || !window.URLSearchParams) { form.submit(); return; } // very old browsers: plain post
 
-    // No form backend yet: open the visitor's email app with the details filled in.
-    var lines = [
-      'Name: ' + value(data, 'name'),
-      'Email: ' + value(data, 'email'),
-      'Company: ' + value(data, 'company'),
-      'Role: ' + value(data, 'role'),
-      '',
-      'Biggest contract-management problem:',
-      value(data, 'problem'),
-      '',
-      'What I wish Trusse would solve:',
-      value(data, 'wish') || '-',
-      '',
-      'At London Build Expo: ' + (data.get('expo') ? 'yes' : 'no'),
-      'Send me updates: ' + (data.get('updates') ? 'yes' : 'no')
-    ];
-    location.href = 'mailto:' + WAITLIST_EMAIL +
-      '?subject=' + encodeURIComponent('Trusse waiting list: ' + value(data, 'name')) +
-      '&body=' + encodeURIComponent(lines.join('\r\n'));
-    showDone(data, false);
+    var body = new URLSearchParams();
+    Object.keys(NAMES).forEach(function (key) {
+      var v = value(data, key);
+      if (key === 'role' && v === 'Other') v = 'Other: ' + value(data, 'role-other');
+      if (v) body.append(NAMES[key], v);
+    });
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending\u2026';
+    // Google doesn't let other sites read its reply, so a request that reaches Google counts as sent.
+    fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () { showDone(data, false); }, function () { submitError.hidden = false; })
+      .then(function () { submitBtn.disabled = false; submitBtn.textContent = submitLabel; });
   });
 })();
