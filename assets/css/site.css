@@ -15,6 +15,7 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);fo
 body.bar-closed{--bar-h:0px}
 img,svg{display:block;max-width:100%}
 [hidden]{display:none !important}
+h1,h2,h3,.t-cta{text-wrap:balance}
 a{color:inherit}
 h1,h2,h3,p,ol,ul,dl,dd,figure{margin:0}
 ol,ul{padding:0;list-style:none}
