@@ -379,5 +379,6 @@ select.input option{color:var(--ink);background:#fff}
   .flow li{padding-right:12px}
   .flow li:not(:last-child)::after{left:56px;right:8px;top:24px}
   .flow li:not(:last-child)::before{right:8px;top:20px}
+  .band__credit{top:10px;bottom:auto}
   .band{align-items:flex-end;background-image:linear-gradient(0deg,rgba(15,14,13,.85) 0%,rgba(15,14,13,.35) 60%,rgba(15,14,13,.1) 100%),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Construction_tower_cranes_at_Temple%2C_City_of_London%2C_England_01.jpg/1920px-Construction_tower_cranes_at_Temple%2C_City_of_London%2C_England_01.jpg")}
 }
